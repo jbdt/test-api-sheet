@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualizar contenido desde API REST</title>
+</head>
+<body>
+
+    <h1>Información desde API REST</h1>
+    <p id="informacion"></p>
+
+    <script>
+        const apiUrl = 'https://script.google.com/macros/s/AKfycbzlOQq1KCApEXtYYqcE6aHjIeli2CNfEDjlT721py_6R3Z8AaUODO9gO9Qev4bgYf1NjA/exec?path=Sheet1&action=read';
+
+        const pElement = document.getElementById('informacion');
+
+        fetch(apiUrl)
+            .then(response => response.json())
+            .then(data => {
+                // Supongamos que el JSON tiene un campo llamado 'informacion'
+                const user = data.data[0]['Others'];
+                console.log(user);
+                pElement.textContent = user;
+            })
+            .catch(error => {
+                console.error('Error al obtener datos de la API:', error);
+            });
+    </script>
+
+</body>
+</html>
